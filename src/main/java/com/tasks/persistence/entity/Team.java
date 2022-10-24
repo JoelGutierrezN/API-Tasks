@@ -20,7 +20,7 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private List<Task> tasks;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "leader_id", referencedColumnName = "id")
+    @JoinColumn(name = "leader_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User leader;
     @OneToMany(mappedBy = "user")
     private List<UserTeam> users;

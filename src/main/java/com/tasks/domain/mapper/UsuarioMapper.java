@@ -7,8 +7,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+import java.util.Optional;
+
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface UsuarioMapper {
     @Mappings({
             @Mapping(source = "id", target = "id"),
             @Mapping(source = "fullname", target = "nombre"),
@@ -25,8 +28,9 @@ public interface UserMapper {
             @Mapping(source = "teams", target = "perteneceALosEquipos"),
     })
     Usuario toUsuario(User user);
-
+    List<Usuario> toUsuarios(List<User> users);
     @InheritInverseConfiguration
 //    @Mapping(target = "nombre", ignore = true) - En caso de ignorar alguna field que no fue usada en el la primera direccion del mapeo
     User toUser(Usuario usuario);
+    List<User> toUsers(List<Usuario> usuarios);
 }

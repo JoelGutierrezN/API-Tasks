@@ -21,7 +21,7 @@ public class User {
     private Short   role;
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
-    @OneToOne(mappedBy = "leader")
+    @OneToOne(mappedBy = "leader" )
     private Team ownerOf;
     @OneToMany(mappedBy = "team")
     private List<UserTeam> teams;

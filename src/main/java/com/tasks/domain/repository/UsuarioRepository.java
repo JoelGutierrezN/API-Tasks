@@ -5,9 +5,9 @@ import com.tasks.domain.Usuario;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository {
+public interface UsuarioRepository {
+    Optional<Usuario> getUser(long id);
     List<Usuario> getAll();
-    Optional<List<Usuario>> getUser(int id);
     Usuario save(Usuario usuario);
     void delete(long id);
 }
