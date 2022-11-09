@@ -1,17 +1,20 @@
-package com.tasks.persistence.entity;
+package com.tasks.persistence.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String  fullname;
     private String  username;
-    private Short   gender;
+    private String   gender;
     private String  email;
     private String  password;
     private String  phone;
@@ -21,10 +24,12 @@ public class User {
     private Short   role;
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
-    @OneToOne(mappedBy = "leader" )
+    @OneToOne(mappedBy = "leader")
     private Team ownerOf;
     @OneToMany(mappedBy = "team")
     private List<UserTeam> teams;
+    @OneToMany(mappedBy = "task")
+    private List<UserTask> tasks;
 
     public Long getId() {
         return id;
@@ -50,11 +55,11 @@ public class User {
         this.username = username;
     }
 
-    public Short getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Short gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -128,5 +133,13 @@ public class User {
 
     public void setTeams(List<UserTeam> teams) {
         this.teams = teams;
+    }
+
+    public List<UserTask> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<UserTask> tasks) {
+        this.tasks = tasks;
     }
 }

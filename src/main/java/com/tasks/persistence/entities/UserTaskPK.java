@@ -1,15 +1,17 @@
-package com.tasks.persistence.entity;
+package com.tasks.persistence.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class UserTeamPK implements Serializable {
+public class UserTaskPK implements Serializable {
+
     @Column(name = "user_id")
     private Long userId;
-    @Column(name = "team_id")
-    private Long teamId;
+
+    @Column(name = "task_id")
+    private Long taskId;
 
     public Long getUserId() {
         return userId;
@@ -19,11 +21,11 @@ public class UserTeamPK implements Serializable {
         this.userId = userId;
     }
 
-    public Long getTeamId() {
-        return teamId;
+    public Long getTaskId() {
+        return taskId;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
 }

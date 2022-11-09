@@ -1,4 +1,6 @@
-package com.tasks.persistence.entity;
+package com.tasks.persistence.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -10,10 +12,12 @@ public class UserTeam {
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "team_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Team team;
 
     public UserTeamPK getId() {

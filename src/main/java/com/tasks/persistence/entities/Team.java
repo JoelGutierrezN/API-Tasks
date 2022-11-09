@@ -1,4 +1,6 @@
-package com.tasks.persistence.entity;
+package com.tasks.persistence.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,16 +17,14 @@ public class Team {
     private String teamImage;
     @Column(name = "team_color")
     private String teamColor;
-    @Column(name = "leader_id")
-    private Long leaderId;
     @OneToMany(mappedBy = "team")
     private List<Task> tasks;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "leader_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "leader_id", referencedColumnName = "id")
+    @JsonIgnore
     private User leader;
     @OneToMany(mappedBy = "user")
     private List<UserTeam> users;
-
 
     public Long getId() {
         return id;
@@ -58,12 +58,12 @@ public class Team {
         this.teamColor = teamColor;
     }
 
-    public Long getLeaderId() {
-        return leaderId;
+    public User getLeader() {
+        return leader;
     }
 
-    public void setLeaderId(Long leaderId) {
-        this.leaderId = leaderId;
+    public void setLeader(User leader) {
+        this.leader = leader;
     }
 
     public List<Task> getTasks() {
@@ -74,14 +74,6 @@ public class Team {
         this.tasks = tasks;
     }
 
-    public User getLeader() {
-        return leader;
-    }
-
-    public void setLeader(User leader) {
-        this.leader = leader;
-    }
-
     public List<UserTeam> getUsers() {
         return users;
     }
@@ -89,4 +81,6 @@ public class Team {
     public void setUsers(List<UserTeam> users) {
         this.users = users;
     }
+
+
 }

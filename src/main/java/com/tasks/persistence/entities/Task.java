@@ -1,7 +1,9 @@
-package com.tasks.persistence.entity;
+package com.tasks.persistence.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,20 +19,28 @@ public class Task {
     private Short isBloqued;
     private Short status;
     @Column(name = "due_date")
-    private LocalDateTime dueDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dueDate;
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
     @Column(name = "finished_at")
-    private LocalDateTime finishedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date finishedAt;
     @Column(name = "team_id")
     private Long teamID;
     @ManyToOne
     @JoinColumn(name = "team_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Team team;
     @OneToMany(mappedBy = "task")
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserTask> users;
 
     public Long getId() {
         return id;
@@ -72,35 +82,35 @@ public class Task {
         this.status = status;
     }
 
-    public LocalDateTime getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public LocalDateTime getFinishedAt() {
+    public Date getFinishedAt() {
         return finishedAt;
     }
 
-    public void setFinishedAt(LocalDateTime finishedAt) {
+    public void setFinishedAt(Date finishedAt) {
         this.finishedAt = finishedAt;
     }
 
@@ -126,5 +136,13 @@ public class Task {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<UserTask> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserTask> users) {
+        this.users = users;
     }
 }
