@@ -26,7 +26,7 @@ public class Team implements Serializable {
     @JoinColumn(name = "leader_id", referencedColumnName = "id")
     @JsonIgnore
     private User leader;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "team")
     private List<UserTeam> users;
 
     public Long getId() {

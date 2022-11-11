@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "users_teams")
 public class UserTeam {
     @EmbeddedId
-    private UserTeamPK id;
+    private UserTeamPK userTeamPK;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -21,11 +21,11 @@ public class UserTeam {
     private Team team;
 
     public UserTeamPK getId() {
-        return id;
+        return userTeamPK;
     }
 
     public void setId(UserTeamPK id) {
-        this.id = id;
+        this.userTeamPK = id;
     }
 
     public User getUser() {

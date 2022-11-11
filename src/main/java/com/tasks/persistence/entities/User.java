@@ -26,7 +26,7 @@ public class User implements Serializable {
     private List<Comment> comments;
     @OneToOne(mappedBy = "leader")
     private Team ownerOf;
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "user")
     private List<UserTeam> teams;
     @OneToMany(mappedBy = "task")
     private List<UserTask> tasks;

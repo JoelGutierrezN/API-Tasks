@@ -9,10 +9,11 @@ import javax.persistence.*;
 public class UserTask {
 
     @EmbeddedId
-    private  UserTaskPK id;
+    private UserTaskPK userTask;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne
@@ -21,11 +22,11 @@ public class UserTask {
     private Task task;
 
     public UserTaskPK getId() {
-        return id;
+        return userTask;
     }
 
     public void setId(UserTaskPK id) {
-        this.id = id;
+        this.userTask = id;
     }
 
     public User getUser() {

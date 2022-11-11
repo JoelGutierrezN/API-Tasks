@@ -40,6 +40,7 @@ public class Task {
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<UserTask> users;
 
     public Long getId() {
